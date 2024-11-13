@@ -1,14 +1,29 @@
-using System;
-using System.Collections.Generic;
+using Supabase.Core;
+using Supabase.Postgrest.Attributes;
+using Supabase.Postgrest.Models;
 
 namespace ActorsRestService.Models
 {
-    public partial class Actor
+    [Table("Actor")]
+    public partial class Actor: BaseModel
     {
-        public long Id { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string CountryCode { get; set; }
-        public DateTime? DateOfBith { get; set; }
+        [PrimaryKey("actor_id")]
+        public int ActorId { get; set; }
+
+        [Column("last_name")]
+        public string? LastName { get; set; }
+
+        [Column("first_name")]
+        public string? FirstName { get; set; }
+
+        [Column("country_code")]
+        public string? CountryCode { get; set; }
+
+        [Column("date_of_birth")]
+        public DateTime? DateOfBirth { get; set; }
+
+        [Column("created_at")]
+        public DateTime? CreatedAt { get; set; }
     }
+
 }

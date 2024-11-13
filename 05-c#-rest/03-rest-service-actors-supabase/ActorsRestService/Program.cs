@@ -1,13 +1,20 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ActorsRestService.Data;
+
+using Supabase;
+
+using ActorsRestService;
+
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<ActorsRestServiceContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ActorsRestServiceContext") ?? throw new InvalidOperationException("Connection string 'ActorsRestServiceContext' not found.")));
+
+var supabaseConfiguration = builder.Configuration
+    .GetSection("Supabase")
+    .Get<SupabaseConfiguration>(); 
 
 // Add services to the container.
+builder.Services.AddScoped<Supabase.Client>(
+    provider => new Supabase.Client(supabaseConfiguration.Url, supabaseConfiguration.Key));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
