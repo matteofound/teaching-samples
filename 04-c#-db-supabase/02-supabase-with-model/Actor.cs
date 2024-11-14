@@ -9,7 +9,7 @@ namespace DssSupabase02
     class Actor : BaseModel
     {
         [PrimaryKey("actor_id")]
-        public int ActorId { get; set; }
+        public long ActorId { get; set; }
 
         [Column("last_name")]
         public string? LastName { get; set; }
