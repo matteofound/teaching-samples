@@ -26,8 +26,9 @@ namespace ActorsRestService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Actor>>> GetActor()
         {
-            var response = await _supabase.From<Actor>()
-                                        .Get();
+            var response = await _supabase
+                                    .From<Actor>()
+                                    .Get();
             return response.Models;
         }
 
@@ -35,7 +36,8 @@ namespace ActorsRestService.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Actor>> GetActor(int id)
         {
-            var response = await _supabase.From<Actor>()
+            var response = await _supabase
+                                    .From<Actor>()
                                     .Where(a => a.ActorId == id)
                                     .Get();
             if (response == null)
@@ -50,69 +52,70 @@ namespace ActorsRestService.Controllers
         }
 
 
-        //// PUT: api/Actors/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutActor(long id, Actor actor)
-        //{
-        //    if (id != actor.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/Actors/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutActor(long id, Actor newData)
+        {
+            if (id != newData.ActorId)
+            {
+                return BadRequest();
+            }
+            Actor oldActor = await _supabase
+                            .From<Actor>()
+                            .Where(a => a.ActorId == id)
+                            .Single();
+            if (oldActor is null)
+            {
+                return BadRequest();
+            }
+            oldActor.LastName = newData.LastName;
+            oldActor.FirstName = newData.FirstName;
+            oldActor.CountryCode = newData.CountryCode;
+            oldActor.DateOfBirth = newData.DateOfBirth;
+            oldActor.CreatedAt = newData.CreatedAt;
+            await _supabase
+                    .From<Actor>()
+                    .Update(oldActor);
+            return NoContent();
+        }
 
-            
-        //    _context.Entry(actor).State = EntityState.Modified;
+        // POST: api/Actors
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Actor>> PostActor(Actor actor)
+        {
+            var ret = await _supabase
+                .From<Actor>()
+                .Insert(actor);
+            long id = 0;
+            if ((ret is not null) && (ret.Model is not null))
+                id = ret.Model.ActorId;
+            return CreatedAtAction("GetActor", new { actor_id = id }, actor);
+        }
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ActorExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-            
-        //    return NoContent();
-        //}
+        // DELETE: api/Actors/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteActor(long id)
+        {
+            var response = await _supabase
+                                    .From<Actor>()
+                                    .Where(a => a.ActorId == id)
+                                    .Get();
+            if (response == null)
+            {
+                return NotFound();
+            }
+            if (response.Model == null)
+            {
+                return NotFound();
+            }
+            await _supabase
+                    .From<Actor>()
+                    .Where(x => x.ActorId == id)
+                    .Delete();
+            return NoContent();
+        }
 
-        //// POST: api/Actors
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Actor>> PostActor(Actor actor)
-        //{
-
-        //    _context.Actor.Add(actor);
-        //    await _context.SaveChangesAsync();
-            
-        //    return CreatedAtAction("GetActor", new { id = actor.Id }, actor);
-        //}
-
-        //// DELETE: api/Actors/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteActor(long id)
-        //{
-        //    var actor = await _context.Actor.FindAsync(id);
-        //    if (actor == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Actor.Remove(actor);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool ActorExists(long id)
-        //{
-        //    return _context.Actor.Any(e => e.Id == id);
-        //}
     }
 }
