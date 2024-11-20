@@ -1,0 +1,46 @@
+﻿@page "/arrayiterationmodule"
+
+@using DSS.Helpers;
+
+<PageTitle>Arrays - iteration</PageTitle>
+<h1>Arrays - iteration</h1>
+<br/>
+<button @onclick="Execute">Do It!</button>
+<br/>
+Output:
+<br/>
+<div style="border:solid; border-color:black">
+  <pre>@message</pre>
+</div>
+
+@code {
+    private string message = "";
+
+    private void Execute()
+    {
+        byte[] bytA = new byte[30];
+        bytA[2] = 45;
+        for (int i = 3; i < bytA.Length; i++)
+            bytA[i] = (byte)(2 * i);
+        message += "bytA: " + DSS.Helpers.ArrayHelper.ElementsToString(bytA) + Environment.NewLine;
+        Console.WriteLine(message);
+
+        String spec = " special";
+        String[] seasons = { " spring", " autumn", spec + " winter", " summer" };
+        message += "seasons: " + ArrayHelper.ElementsToString(seasons) + Environment.NewLine;
+        Console.WriteLine(message);
+
+        int[] arr = { 24, 48, 96, 192, 36, 72, 144 };
+        message += "arr: " + ArrayHelper.ElementsToString(arr) + Environment.NewLine;
+        Console.WriteLine(message);
+
+        string[] strA = new string[40];
+        strA[2] = "mickey";
+        strA[3] = "mouse";
+        strA[4] = "donald";
+        strA[5] = "duck";
+        strA[6] = "goofy";
+        message += "strA: " + ArrayHelper.ElementsToString(strA) + Environment.NewLine;
+        Console.WriteLine(message);
+    }
+}

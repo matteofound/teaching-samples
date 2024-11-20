@@ -1,0 +1,21 @@
+@page "/hello-world"
+
+<button class="btn btn-primary" @onclick="ExtendMessage">Hello</button>
+
+<br>
+
+<div class="container p-5 border">
+    <pre>
+        @message
+    </pre>
+</div>
+
+@code{
+
+private string message = "";
+
+private void ExtendMessage(){
+    message += "Hello World!!!\n";
+}
+
+}

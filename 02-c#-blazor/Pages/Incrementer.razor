@@ -1,0 +1,18 @@
+﻿@page "/incrementer"
+
+<PageTitle>Incrementer</PageTitle>
+
+<h1>Incrementer</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-secondary btn-outline" @onclick="IncrementCount">Increase</button>
+
+@code {
+    private int currentCount = 42;
+
+    private void IncrementCount()
+    {
+        currentCount = currentCount + 1;
+    }
+}

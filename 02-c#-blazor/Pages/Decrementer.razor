@@ -1,0 +1,18 @@
+﻿@page "/decrementer"
+
+<PageTitle>Decrementer</PageTitle>
+
+<h1>Decrementer</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-secondary btn-danger" @onclick="DecrementCount">Decrease</button>
+
+@code {
+    private decimal currentCount = -42;
+
+    private void DecrementCount()
+    {
+        currentCount -= 0.5m;
+    }
+}

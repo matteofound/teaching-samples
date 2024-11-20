@@ -1,0 +1,92 @@
+@page "/operations"
+<!-- 
+    Here, the buttons are created
+--> 
+
+<div class="btn-group">
+    <button type="button" class="btn btn-primary" @onclick="Plus2">+2</button>
+    <button type="button" class="btn btn-success" @onclick="Multiply2">*2</button>
+    <button type="button" class="btn btn-danger" @onclick="Minus2">-2</button>
+    <button type="button" class="btn btn-warning" @onclick="Divide2">/2</button>
+</div>
+<span>@comparisonResult</span>
+
+<br>
+
+<div class="container p-1 border">
+    <pre>
+        @message
+    </pre>
+</div>
+
+@code{
+
+private int number = 17;
+
+private string comparisonResult="17 less than 100!";
+
+// string that represents output
+private string message = "17";
+
+private void Plus2(){
+    number += 2; // number is incremented by 2 
+    message += "\n" + number;
+    if( number < 100 ){
+        comparisonResult = number + " less than 100!";
+    }
+    if( number == 100 ){
+        comparisonResult = number + " equal to 100!";
+    }
+    if( number > 100 ){
+        comparisonResult = number + " greater than 100!";
+    }
+}
+
+/* The function that follows duplicates
+the number, and value of the duplicated number
+concatenate to message
+  */
+
+private void Multiply2(){
+    number *= 2;
+    message += 
+    
+            "\n" 
+            
+                        + 
+                        
+        number;
+    if( number < 100 ){
+        comparisonResult = number + " less than 100!";
+    }
+    else if( number == 100 ){
+        comparisonResult = number + " equal to 100!";
+    }
+    else {
+        comparisonResult = number + " greater than 100!";
+    }
+}
+
+private void Minus2(){
+    number -= 2;
+    message += "\n" + number;
+    if( number < 100 )
+        comparisonResult = number + " less than 100!";
+    else if( number == 100 )
+        comparisonResult = number + " equal to 100!";
+    else 
+        comparisonResult = number + " greater than 100!";
+}
+
+private void Divide2(){
+    number = number / 2;
+    message += "\n" + number;
+    if( number < 100 )
+        comparisonResult = number + " less than 100!";
+    else if( number == 100 )
+        comparisonResult = number + " equal to 100!";
+    else 
+        comparisonResult = number + " greater than 100!";
+}
+
+}

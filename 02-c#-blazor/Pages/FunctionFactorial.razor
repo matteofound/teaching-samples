@@ -1,0 +1,56 @@
+﻿@page "/functionfactorial"
+
+<PageTitle>Factorial</PageTitle>
+<h1>Factorial</h1>
+<br/>
+<table>
+    <tr>
+        <td>Argument:</td>
+        <td>
+            <input style="text-align:right" @bind="num"/>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:center" colspan="2">
+            <button title="by forward counting" @onclick="FactorialByFunction">Factorial</button> &nbsp; 
+        </td>
+    </tr>
+    <tr>
+        <td>@num !:</td>
+        <td><input style="text-align:right" @bind="result"/></td>
+    </tr>
+ </table> 
+<br/>
+
+@code {
+
+    private int num = 0;
+
+    private long result = 1;
+
+    private long Fact(int n)
+    {
+        long fakt = 1;
+        for (int i = 1; i <= n; i++)
+        {
+            fakt *= i;
+        }
+        return fakt;
+    }
+
+    private void FactorialByFunction()
+    {
+        Console.WriteLine("FactorialByCountForward");
+        Console.WriteLine("Argument: " + num);
+        if (num < 0)
+        {
+            Console.WriteLine("Error - argument is negative.");
+            result = long.MinValue;
+            return;
+        }
+        result = Fact(num);
+        System.Console.WriteLine("Result: " + result);
+        System.Console.WriteLine();
+    }
+
+}

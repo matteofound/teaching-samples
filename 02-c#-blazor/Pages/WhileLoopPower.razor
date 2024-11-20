@@ -1,0 +1,108 @@
+﻿@page "/whilelooppower"
+
+<PageTitle>Power</PageTitle>
+<h1>Power</h1>
+<br/>
+<table>
+    <tr>
+        <td>Base:</td>
+        <td>
+            <input style="text-align:right" @bind="baseOne"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Exponent:</td>
+        <td>
+            <input style="text-align:right" @bind="exponent"/>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:center" colspan="2">
+            <button title="by forward counting" @onclick="PowerByCountForward">Power</button> &nbsp; 
+            <button title="by backward counting" @onclick="PowerByCountBackward">Power</button> &nbsp; 
+        </td>
+    </tr>
+    <tr>
+        <td>@baseOne powered to the @exponent:</td>
+        <td><input style="text-align:right" @bind="result"/></td>
+    </tr>
+ </table> 
+<br/>
+
+@code {
+
+    private double baseOne = 2.5;
+
+    private int exponent = 0;
+
+    private double result = 1;
+
+    private void PowerByCountForward()
+    {
+        Console.WriteLine("PowerByCountForward");
+        Console.WriteLine("Base: " + baseOne);
+        Console.WriteLine("Exponent: " + exponent);
+        int exp = exponent;
+        double res = 1;
+        if ( exp == 0)
+        {
+            result = res;
+            System.Console.WriteLine("Result: " + result);
+            System.Console.WriteLine();
+            return;
+        }
+        bool exponentIsNegative = false;
+        if( exp < 0)
+        {
+            exponentIsNegative = true;
+            exp = -exp;
+        }
+        int i = 1;
+        while (i <= exp)
+        {
+            res *= baseOne; // res = res * baseOne;
+            i++;
+        }
+        if (!exponentIsNegative)
+            result = res;
+        else
+            result = 1 / res;
+        System.Console.WriteLine("Result: " + result);
+        System.Console.WriteLine();
+    }
+
+    private void PowerByCountBackward()
+    {
+        Console.WriteLine("PowerByCountBackward");
+        Console.WriteLine("Base: " + baseOne);
+        Console.WriteLine("Exponent: " + exponent);
+        int exp = exponent;
+        double res = 1;
+        if (exp == 0)
+        {
+            result = res;
+            System.Console.WriteLine("Result: " + result);
+            System.Console.WriteLine();
+            return;
+        }
+        bool exponentIsNegative = false;
+        if (exp < 0)
+        {
+            exponentIsNegative = true;
+            exp = -exp;
+        }
+        int i = exp;
+        while (i >= 1)
+        {
+            res *= baseOne; 
+            i--;
+        }
+        if (!exponentIsNegative)
+            result = res;
+        else
+            result = 1 / res;
+        System.Console.WriteLine("Result: " + result);
+        System.Console.WriteLine();
+    }
+
+}

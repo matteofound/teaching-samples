@@ -1,0 +1,137 @@
+﻿@page "/functionguessing"
+
+<PageTitle>Guessing Game</PageTitle>
+<h1>Guessing Game</h1>
+<br/>
+<table>
+    <tr>
+        <td>Lower limit:</td>
+        <td>
+            <input style="text-align:right" @bind="lowerLimit"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Upper limit:</td>
+        <td>
+            <input style="text-align:right" @bind="upperLimit"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Maximum gueses:</td>
+        <td>
+            <input style="text-align:right" @bind="maxGuesses"/>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:center" colspan="2">
+            <button @onclick="StartGame">Start Game</button> &nbsp; 
+        </td>
+    </tr>
+    @if ( GuessSectionShouldBeVisible() )
+    {
+            <tr>
+                <td style="text-align:center" colspan="2">
+                    <input style="text-align:right" @bind="newGuess"/> &nbsp;
+                    <button @onclick="CheckGuess">Check</button> &nbsp; 
+                </td>
+            </tr>
+    }
+    <tr>
+        <td colspan="2">
+            <pre>@message</pre>
+        </td>
+    </tr>
+</table>
+<br/>
+
+
+@code {
+    private int upperLimit = 100;
+
+    private int lowerLimit = 1;
+
+    private int envisonedNumber = -1;
+
+    private int newGuess = 0;
+
+    private int upToNowGuesses = 1;
+
+    private int maxGuesses = 7;
+
+    private string message = "Press button 'Start Game'";
+
+    private bool userLoose = false;
+
+    private bool gameStarted = false;
+
+    private bool GuessSectionShouldBeVisible()
+    {
+        return gameStarted && !userLoose;
+    }
+
+    private string StartGameMessage(int ll, int ul, int mg)
+    {
+        return "I envisioned a number between " + ll + " and " + ul + "." + Environment.NewLine
+                + "Try to reveal it in " + mg + " guesses." + Environment.NewLine;
+    }
+
+    private void StartGame()
+    {
+        gameStarted = true;
+        newGuess = 0;
+        upToNowGuesses = 1;
+        userLoose = false;
+        Random rnd = new Random();
+        envisonedNumber = rnd.Next(lowerLimit, upperLimit+1);
+        message = StartGameMessage(lowerLimit, upperLimit, maxGuesses);
+    }
+
+    private string WinMessage(int ng, int utn)
+    {
+        string s = "CONGRATULATION! YOU WIN! Number " + ng
+           + " is the envisioned one!" + Environment.NewLine;
+        s += "You reveal it in " + utn + " gueses."
+                + Environment.NewLine;
+        s += "For new game, press button 'Start Game'";
+        return s;
+    }
+
+    private string LooseMessage(int en)
+    {
+        string s = "SORRY! YOU LOOSE! Number is " + en
+        +"!" + Environment.NewLine;
+        s += "For new game, press button 'Start Game'";
+        return s;
+    }
+
+    private void CheckGuess()
+    {
+        if (envisonedNumber == newGuess)
+        {
+            message += WinMessage(newGuess, upToNowGuesses );
+            gameStarted = false;
+        }
+        else if (envisonedNumber > newGuess)
+        {
+            if (upToNowGuesses >= maxGuesses)
+            {
+                message += LooseMessage(envisonedNumber);
+                userLoose = true;
+            }
+            else     
+                message += "Sorry, envisioned number is greater than " + newGuess + Environment.NewLine;
+        }
+        else
+        {
+            if (upToNowGuesses >= maxGuesses)
+            {
+                message += LooseMessage(envisonedNumber);
+                userLoose = true;
+            }
+            else
+                message += "Sorry, envisioned number is less than " + newGuess + Environment.NewLine;
+        }
+        upToNowGuesses++;
+    }
+
+}

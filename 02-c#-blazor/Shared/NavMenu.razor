@@ -1,0 +1,102 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">DSS</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <ul class="flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" @onclick="ToggleSubmenuBasicTasks">
+                <span class="oi oi-file" aria-hidden="true"></span> Basics
+            </NavLink>
+            @if(expandSubMenuBasicTasks){
+            <ul class="nav flex-column">
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="incrementer">
+                        <span class="oi oi-plus" aria-hidden="true"></span> Incrementer
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="decrementer">
+                        <span class="oi oi-minus" aria-hidden="true"></span> Decrementer
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="incdec">
+                        <span class="oi oi-bolt" aria-hidden="true"></span> Incr-decr
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="hello-world">
+                        <span class="oi oi-compass" aria-hidden="true"></span> Hello world
+                    </NavLink>
+                </li>
+            </ul>
+            }
+        </li>
+
+
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" @onclick="ToggleSubmenuBranchingLooping">
+                <span class="oi oi-share" aria-hidden="true"></span> Branch Loop
+            </NavLink>
+            @if(expandSubMenuBranchingLooping){
+            <ul class="nav flex-column">
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="operations">
+                        <span class="oi oi-arrow-top" aria-hidden="true"></span> Operations
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="minmax">
+                        <span class="oi oi-location" aria-hidden="true"></span> Min Max 5
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="geometry">
+                        <span class="oi oi-pencil" aria-hidden="true"></span> Geometry
+                    </NavLink>
+                </li>
+            </ul>
+            }
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="fetchdata">
+                <span class="oi oi-briefcase" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </li>
+    </ul>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+    private bool expandSubMenuBasicTasks = false;
+    private bool expandSubMenuBranchingLooping = false;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void ToggleSubmenuBasicTasks()
+    {
+        expandSubMenuBasicTasks = !expandSubMenuBasicTasks;
+    }
+
+    private void ToggleSubmenuBranchingLooping()
+    {
+        expandSubMenuBranchingLooping = !expandSubMenuBranchingLooping;
+    }
+
+    
+}

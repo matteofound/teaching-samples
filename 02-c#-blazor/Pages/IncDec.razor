@@ -1,0 +1,27 @@
+@page "/incdec"
+
+<PageTitle>Incrementer</PageTitle>
+
+<h1>Incrementer</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<div class="btn-group">
+    <button class="btn btn-outline-primary" @onclick="IncrementCount">Increase</button>
+    <button class="btn btn-outline-secondary" @onclick="DecrementCount">Decrease</button>
+</div>
+
+@code {
+    private int currentCount = 42;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private void DecrementCount()
+    {
+        currentCount--;
+    }
+
+}
