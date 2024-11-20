@@ -1,24 +1,24 @@
-@page "/geometry2"
+@page "/geometry-2"
 
 <PageTitle>Circumference and Area</PageTitle>
 <h1>Circumference and Area</h1>
-<br/>
+<br />
 <table>
     <tr>
         <td>Shape:</td>
         <td>
             <select @bind="shape">
-              <option value="square">Square</option>
-              <option value="rectangle">Rectangle</option>
-              <option value="circle">Circle</option>
-              <option value="elipse">Elipse</option>
+                <option value="square">Square</option>
+                <option value="rectangle">Rectangle</option>
+                <option value="circle">Circle</option>
+                <option value="elipse">Elipse</option>
             </select>
         </td>
     </tr>
     <tr>
         <td>Argument:</td>
         <td>
-            <input style="text-align:right" @bind="x"/>
+            <input style="text-align:right" @bind="x" />
         </td>
     </tr>
     @if (shape == "rectangle" || shape == "elipse")
@@ -26,25 +26,25 @@
         <tr>
             <td>Second argument:</td>
             <td>
-                <input style="text-align:right" @bind="y"/>
+                <input style="text-align:right" @bind="y" />
             </td>
         </tr>
     }
     <tr>
         <td style="text-align:center" colspan="2">
-            <button @onclick="CircumferenceArea">Calculate</button> &nbsp; 
+            <button @onclick="CircumferenceArea">Calculate</button> &nbsp;
         </td>
     </tr>
     <tr>
         <td>Circumference:</td>
-        <td><input style="text-align:right" @bind="circumference"/></td>
+        <td><input style="text-align:right" @bind="circumference" /></td>
     </tr>
     <tr>
         <td>Area:</td>
-        <td><input style="text-align:right" @bind="area"/></td>
+        <td><input style="text-align:right" @bind="area" /></td>
     </tr>
 </table>
-<br/>
+<br />
 
 
 
@@ -64,7 +64,7 @@
     private void CircumferenceArea()
     {
         System.Console.WriteLine("Shape: " + shape + ". x: " + x + ".");
-        switch(shape)
+        switch (shape)
         {
             case "circle":
                 circumference = 2 * pi * x;
@@ -80,11 +80,11 @@
                 break;
             case "elipse":
                 area = x * y * pi;
-                circumference = Math.Sqrt((x*x)+(y*y)) * pi ;
+                circumference = Math.Sqrt((x * x) + (y * y)) * pi;
                 break;
             default:
                 // we can not calculate area or circumference for this shape
-                circumference = Double. NegativeInfinity;
+                circumference = Double.NegativeInfinity;
                 area = Double.NegativeInfinity;
                 break;
         }

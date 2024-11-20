@@ -1,0 +1,75 @@
+﻿@page "/actors-show-module"
+
+@using DSS.Helpers;
+@using DSS.Models;
+
+<PageTitle>Actors</PageTitle>
+<h1>Actors</h1>
+<br />
+<table>
+    <tr>
+        <td>First name</td>
+        <td>Last name</td>
+        <td>IMDB score</td>
+    </tr>
+    @foreach (Actor act in filmCrew)
+    {
+        <tr>
+            <td>@act.FirstName</td>
+            <td>@act.LastName</td>
+            <td>@act.ImdbMark</td>
+        </tr>
+    }
+</table>
+<br />
+<button @onclick="AverageIMDB">Average IMDB</button>
+<br />
+@if (showResult)
+{
+    <p> Average IMDB is: @avgIMDB </p>
+}
+@code {
+    private bool showResult = false;
+
+    private double avgIMDB;
+
+    private Actor movieStar1 = new Actor()
+        {
+            FirstName = "John",
+            LastName = "Goodman",
+            ImdbMark = 9.7
+        };
+
+    private Actor movieStar2 = new Actor()
+        {
+            LastName = "De Niro",
+            ImdbMark = 9.4,
+            FirstName = "Robert"
+        };
+
+
+    private Actor theBadGuy = new Actor()
+        {
+            LastName = "Spacey",
+            ImdbMark = 9.6,
+            FirstName = "Kevin"
+        };
+
+    private Actor[] filmCrew = new Actor[3];
+
+    protected override async Task OnInitializedAsync()
+    {
+        filmCrew[0] = movieStar1;
+        filmCrew[1] = movieStar2;
+        filmCrew[2] = theBadGuy;
+    }
+
+    private void AverageIMDB()
+    {
+        showResult = true;
+        double[] vals = new double[filmCrew.Length];
+        for (int i = 0; i < vals.Length; i++)
+            vals[i] = filmCrew[i].ImdbMark;
+        avgIMDB = ArrayHelper.Avg(vals);
+    }
+}

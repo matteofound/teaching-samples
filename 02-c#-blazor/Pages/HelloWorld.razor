@@ -1,21 +1,24 @@
 @page "/hello-world"
 
-<button class="btn btn-primary" @onclick="ExtendMessage">Hello</button>
-
-<br>
-
-<div class="container p-5 border">
-    <pre>
-        @message
-    </pre>
+<PageTitle>Sequence</PageTitle>
+<h1>Sequence</h1>
+<br />
+<button @onclick="Execute">Do It!</button>
+<br />
+Output:
+<br />
+<div style="border:solid; border-color:black">
+    <pre>@message</pre>
 </div>
 
-@code{
+@code {
+    private string message = "";
 
-private string message = "";
-
-private void ExtendMessage(){
-    message += "Hello World!!!\n";
-}
-
+    private void Execute()
+    {
+        message = message + "Hello world!!!" + Environment.NewLine;
+        message = message + "Hello World, again!" + Environment.NewLine;
+        message = message + "Hello World, once again!" + Environment.NewLine;
+        message = message + "Goodbye." + Environment.NewLine;
+    }
 }

@@ -1,0 +1,40 @@
+﻿@page "/append-clear"
+
+<PageTitle>Append and clear</PageTitle>
+<h1>Append and clear</h1>
+<br/>
+<table>
+    <tr>
+        <td>Input:</td>
+        <td><input @bind="userInput"/></td>
+    </tr>
+    <tr>
+        <td style="text-align:center" colspan="2">
+            <button @onclick="Write">Write</button>
+            <button @onclick="Clear">Clear</button>
+        </td>
+    </tr>
+</table>
+<br/>
+Output:
+<br/>
+<div style="border:solid; border-color:black">
+  <pre>@message</pre>
+</div>
+
+@code {
+    private string message = "";
+    private string userInput = "";
+
+    private void Clear()
+    {
+        message = "";
+        System.Console.WriteLine("Message is cleared.");
+    }
+
+    private void Write()
+    {
+        message = message + userInput + Environment.NewLine;
+        System.Console.WriteLine("Text is appended to message. Text: " + userInput);
+    }
+}
