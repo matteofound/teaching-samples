@@ -48,10 +48,10 @@
             }
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" @onclick="ToggleSubmenuBranching">
-                <span class="oi oi-share" aria-hidden="true"></span> Branching
+            <NavLink class="nav-link" href="" @onclick="ToggleSubmenuBranches">
+                <span class="oi oi-share" aria-hidden="true"></span> Branches
             </NavLink>
-            @if(expandSubMenuBranching){
+            @if(expandSubMenuBranches){
             <ul class="nav flex-column">
                 <li class="nav-item px-3">
                     <NavLink class="nav-link" href="operations">
@@ -77,10 +77,10 @@
             }
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" @onclick="ToggleSubmenuLooping">
-                <span class="oi oi-share" aria-hidden="true"></span> Looping
+            <NavLink class="nav-link" href="" @onclick="ToggleSubmenuLoops">
+                <span class="oi oi-share" aria-hidden="true"></span> Loops
             </NavLink>
-            @if(expandSubMenuLooping){
+            @if(expandSubMenuLoops){
             <ul class="nav flex-column">
                 <li class="nav-item px-3">
                     <NavLink class="nav-link" href="while-loop-factorial">
@@ -102,6 +102,45 @@
                         <span class="oi oi-location" aria-hidden="true"></span> Power DW
                     </NavLink>
                 </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="for-loop-factorial">
+                        <span class="oi oi-arrow-top" aria-hidden="true"></span> Factorial F
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="for-loop-power">
+                        <span class="oi oi-location" aria-hidden="true"></span> Power F
+                    </NavLink>
+                </li>
+            </ul>
+            }
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" @onclick="ToggleSubmenuFunctions">
+                <span class="oi oi-share" aria-hidden="true"></span> Functions
+            </NavLink>
+            @if(expandSubMenuFunctions){
+            <ul class="nav flex-column">
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="function-factorial">
+                        <span class="oi oi-arrow-top" aria-hidden="true"></span> Factorial
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="function-power">
+                        <span class="oi oi-location" aria-hidden="true"></span> Power
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="function-guessing">
+                        <span class="oi oi-arrow-top" aria-hidden="true"></span> Guessing
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="module-namespace-power">
+                        <span class="oi oi-location" aria-hidden="true"></span> Power MN
+                    </NavLink>
+                </li>
             </ul>
             }
         </li>
@@ -111,8 +150,9 @@
 @code {
     private bool collapseNavMenu = true;
     private bool expandSubMenuBasicTasks = false;
-    private bool expandSubMenuBranching = false;
-    private bool expandSubMenuLooping = false;
+    private bool expandSubMenuBranches = false;
+    private bool expandSubMenuLoops = false;
+    private bool expandSubMenuFunctions = false;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
@@ -125,27 +165,40 @@
     {
         expandSubMenuBasicTasks = !expandSubMenuBasicTasks;
         if(expandSubMenuBasicTasks){
-            expandSubMenuBranching = false;
-            expandSubMenuLooping = false;
+            expandSubMenuBranches = false;
+            expandSubMenuLoops = false;
+            expandSubMenuFunctions = false;
         }
     }
 
-    private void ToggleSubmenuBranching()
+    private void ToggleSubmenuBranches()
     {
-        expandSubMenuBranching = !expandSubMenuBranching;
-        if(expandSubMenuBranching){
+        expandSubMenuBranches = !expandSubMenuBranches;
+        if(expandSubMenuBranches){
             expandSubMenuBasicTasks = false;
-            expandSubMenuLooping = false;
+            expandSubMenuLoops = false;
+            expandSubMenuFunctions = false;
         }
     }
 
-    private void ToggleSubmenuLooping()
+    private void ToggleSubmenuLoops()
     {
-        expandSubMenuLooping = !expandSubMenuLooping;
-        if(expandSubMenuLooping){
+        expandSubMenuLoops = !expandSubMenuLoops;
+        if(expandSubMenuLoops){
             expandSubMenuBasicTasks = false;
-            expandSubMenuBranching = false;
+            expandSubMenuBranches = false;
+            expandSubMenuFunctions = false;
         }
     }
-    
+
+    private void ToggleSubmenuFunctions()
+    {
+        expandSubMenuFunctions = !expandSubMenuFunctions;
+        if(expandSubMenuFunctions){
+            expandSubMenuBasicTasks = false;
+            expandSubMenuBranches = false;
+            expandSubMenuLoops = false;
+        }
+    }
+
 }
