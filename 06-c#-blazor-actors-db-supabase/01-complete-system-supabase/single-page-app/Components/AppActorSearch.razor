@@ -11,7 +11,7 @@
         @foreach(var actor in filteredActors){
             <li @onclick="@(() => OnSelect(actor))">
                 <a>
-                    @actor.FirstName @actor.LastName.ToUpper() (@actor.CountryCode)
+                    @actor.firstName @actor.lastName.ToUpper() (@actor.countryCode)
                 </a>
             </li>
     }   
@@ -40,9 +40,9 @@
         return await _actorService.Search(searchBox, searchBox, searchBox);
     }
     private async Task OnSelect(Actor a){
-        await _messagingService.Add("Actor selected " + a.FirstName + " " 
-            + a.LastName + " (" + a.Id + ")");
-        _navigationManager.NavigateTo("/actordetail/" + a.Id);
+        await _messagingService.Add("Actor selected " + a.firstName + " " 
+            + a.lastName + " (" + a.actorId + ")");
+        _navigationManager.NavigateTo("/actordetail/" + a.actorId);
     }
     
 }

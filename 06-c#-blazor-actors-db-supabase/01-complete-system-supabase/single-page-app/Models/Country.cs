@@ -5,8 +5,8 @@ namespace project.Models
 {
     public class Country
     {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
+        public string countryCode { get; set; }
+        public string countryName { get; set; }
+        public DateTime? createdAt { get; set; }
     }
 }

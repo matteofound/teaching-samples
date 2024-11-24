@@ -27,7 +27,7 @@ else
         {
             <li>
                 <span @onclick="@(()=>OnSelect(c))">
-                    <span class="badge">@c.Id</span> @c.Code &nbsp; @c.Name
+                    <span class="badge">@c.countryCode</span> @c.countryName
                 </span>
                 <button class="delete" @onclick="@(()=>Delete(c))">x</button>
             </li>
@@ -52,9 +52,9 @@ else
 
     private async Task OnSelect(Country country)
     {
-        await _messagingService.Add("Country selected: " + country.Code + " "
-        + country.Name);
-        _navigationManager.NavigateTo("countrydetail/" + country.Id);
+        await _messagingService.Add("Country selected: " + country.countryCode + " "
+        + country.countryName);
+        _navigationManager.NavigateTo("countrydetail/" + country.countryCode);
     }
 
     private async Task Add()
@@ -77,9 +77,9 @@ else
     {
         List<Country> countries = await _countryService.GetCountries();
         _selectedCountry = countries
-            .Where(x => x.Id == long.Parse(e.Value.ToString()))
+            .Where(x => x.countryCode == e.Value.ToString())
             .FirstOrDefault();
-        await _messagingService.Add("Country Id selected: " + e.Value.ToString());
+        await _messagingService.Add("Country code selected: " + e.Value.ToString());
     }
 
 }

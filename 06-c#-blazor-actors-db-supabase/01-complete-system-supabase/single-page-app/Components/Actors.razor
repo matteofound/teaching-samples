@@ -23,7 +23,7 @@ else
         <select @onchange="ConutryChanged">
             @foreach (var c in _countries)
             {
-                <option value=@c.Id>@c.Code - @c.Name</option>
+                <option value=@c.countryCode>@c.countryName</option>
             }
         </select>
         <button @onclick="Add"> Add</button>
@@ -34,8 +34,8 @@ else
         {
             <li>
                 <span @onclick="@(()=>OnSelect(a))">
-                    <span class="badge">@a.Id</span> @a.FirstName &nbsp; @a.LastName
-                    - @a.DateOfBith?.ToShortDateString() ( @a.CountryCode )
+                    <span class="badge">@a.actorId</span> @a.firstName &nbsp; @a.lastName
+                    - @a.dateOfBirth?.ToShortDateString() ( @a.countryCode )
                 </span>
                 <button class="delete" @onclick="@(()=>Delete(a))">x</button>
             </li>
@@ -63,9 +63,9 @@ else
 
     private async Task OnSelect(Actor actor)
     {
-        await _messagingService.Add("ActorComponent::Actor selected: " + actor.FirstName + " "
-        + actor.LastName);
-        _navigationManager.NavigateTo("/actordetail/" + actor.Id);
+        await _messagingService.Add("ActorComponent::Actor selected: " + actor.firstName + " "
+        + actor.lastName);
+        _navigationManager.NavigateTo("/actordetail/" + actor.actorId);
     }
 
     private async Task Add()
@@ -81,7 +81,7 @@ else
         await _actorService.Delete(actor);
         _actors = await _actorService.GetActors();
         await _messagingService.Add("ActorComponent::Actor deleted: "
-        + actor.FirstName + " " + LastName);
+        + actor.firstName + " " + LastName);
     }
 
     private async Task ConutryChanged(ChangeEventArgs e)

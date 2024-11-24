@@ -7,23 +7,22 @@
 {
     @if (@_currentMode == @Mode.View)
     {
-        <h2>Details for @SelectedCountry.Name ( @SelectedCountry.Code.ToUpper() )</h2>
+        <h2>Details for @SelectedCountry.countryName ( @SelectedCountry.countryCode.ToUpper() )</h2>
         <br />
-        <div><span>id: </span>@SelectedCountry.Id</div>
-        <div><span>code: </span>@SelectedCountry.Code</div>
-        <div><span>name: </span>@SelectedCountry.Name</div>
+        <div><span>code: </span>@SelectedCountry.countryCode</div>
+        <div><span>name: </span>@SelectedCountry.countryName</div>
         <button class="clear" @onclick="Edit"> Edit</button>
     }
     @if (@_currentMode == @Mode.Edit)
     {
-        <h2>Edit data for @SelectedCountry.Name ( @SelectedCountry.Code.ToUpper() )</h2>
+        <h2>Edit data for @SelectedCountry.countryName ( @SelectedCountry.countryCode.ToUpper() )</h2>
         <div>
             <label> code: </label>
-            <input @bind="SelectedCountry.Code" placeholder="Code">
+            <input @bind="SelectedCountry.countryCode" placeholder="Code">
         </div>
         <div>
             <label> name: </label>
-            <input @bind="SelectedCountry.Name" placeholder="Name">
+            <input @bind="SelectedCountry.countryName" placeholder="Name">
         </div>
         <button class="clear" @onclick="Save"> Save</button>
     }
@@ -36,7 +35,7 @@
     Mode _currentMode = Mode.View;
 
     [Parameter]
-    public string Id { get; set; }
+    public string Code { get; set; }
 
 
     public Country SelectedCountry { get; set; }
@@ -45,21 +44,21 @@
     protected override async Task OnInitializedAsync()
     {
         _countries = await _countryService.GetCountries();
-        SelectedCountry = _countries.First(x => x.Id == long.Parse(Id));
+        SelectedCountry = _countries.First(x => x.countryCode == Code);
     }
 
     private async Task Edit()
     {
         _currentMode = Mode.Edit;
-        await _messagingService.Add("CountryDetail::Country edited: " + SelectedCountry.Name + " ("
-        + SelectedCountry.Code + ")");
+        await _messagingService.Add("CountryDetail::Country edited: " + SelectedCountry.countryName + " ("
+        + SelectedCountry.countryCode + ")");
     }
 
     private async Task Save()
     {
         _currentMode = Mode.View;
         await _countryService.Update(SelectedCountry);
-        await _messagingService.Add("CountryDetail::Country saved: " + SelectedCountry.Name + " ("
-        + SelectedCountry.Code + ")");
+        await _messagingService.Add("CountryDetail::Country saved: " + SelectedCountry.countryName + " ("
+        + SelectedCountry.countryCode + ")");
     }
 }

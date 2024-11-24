@@ -5,12 +5,11 @@ namespace project.Models
 {
     public partial class Actor
     {
-        public long Id { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public long CountryId { get; set; }
-        public string CountryCode { get; set; }
-        public string CountryName { get; set; }
-        public DateTime? DateOfBith { get; set; }
+        public long actorId { get; set; }
+        public string lastName { get; set; }
+        public string firstName { get; set; }
+        public string countryCode { get; set; }
+        public DateTime? dateOfBirth { get; set; }
+        public DateTime? createdAt { get; set; }
     }
 }

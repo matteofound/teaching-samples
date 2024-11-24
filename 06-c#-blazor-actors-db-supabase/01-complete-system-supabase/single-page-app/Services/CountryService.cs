@@ -12,7 +12,7 @@ namespace project.Services
 {
     public class CountryService : ICountryService
     {
-        private const string _requestUri = "https://localhost:6001/api/country";
+        private const string _requestUri = "https://localhost:6001/api/Countries";
         private readonly HttpClient _httpClient;
         private readonly IMessagingService _messagingService;
 
@@ -37,9 +37,8 @@ namespace project.Services
             // sending request for adding to the server
             Country countryAdd = new Country()
             {
-                Id = -1,
-                Code = countyCode,
-                Name = counntryName
+                countryCode = countyCode,
+                countryName = counntryName
             };
             var response = await _httpClient.PostAsJsonAsync(_requestUri, countryAdd);
             await _messagingService.Add(response.IsSuccessStatusCode ?
@@ -49,11 +48,11 @@ namespace project.Services
             return 0;      
         }
 
-        public async Task<int> Delete(Country actor)
+        public async Task<int> Delete(Country country)
         {
             // sending request for deleting to the server
             var response = await _httpClient.DeleteAsync(_requestUri + "/"
-                + actor.Id);
+                + country.countryCode);
             await _messagingService.Add(response.IsSuccessStatusCode ?
                 "CountryService::Sent request for delete" :
                 "CountryService::Error while deleting");
@@ -66,12 +65,11 @@ namespace project.Services
        // sending request for updating to the server
             Country countryUpd = new Country()
             {
-                Id = country.Id,
-                Code = country.Code,
-                Name = country.Name
+                countryCode = country.countryCode,
+                countryName = country.countryName
             };
             var response = await _httpClient.PutAsJsonAsync<Country>(
-                _requestUri + "/" + country.Id, countryUpd);
+                _requestUri + "/" + country.countryCode, countryUpd);
             await _messagingService.Add(response.IsSuccessStatusCode ?
                 "CountryService::Sent request for update" :
                 "CountryService::Error while updating");

@@ -12,7 +12,7 @@ namespace project.Services
 {
     public class ActorService : IActorService
     {
-        private const string _requestUri = "https://localhost:6001/api/actor";
+        private const string _requestUri = "https://localhost:6001/api/Actors";
         private readonly HttpClient _httpClient;
         private readonly IMessagingService _messagingService;
 
@@ -55,7 +55,7 @@ namespace project.Services
         {
             // sending request for deleting to the server
             var response = await _httpClient.DeleteAsync(_requestUri + "/"
-                + actor.Id);
+                + actor.actorId);
             await _messagingService.Add(response.IsSuccessStatusCode ?
                 "ActorService::Sent request for delete" :
                 "ActorService::Error while deleting");
@@ -68,14 +68,14 @@ namespace project.Services
             // sending request for updating to the server
             ActorUpdateDTO actorUpd = new ActorUpdateDTO()
             {
-                Id = actor.Id,
-                FirstName = actor.FirstName,
-                LastName = actor.LastName,
-                CountryId = actor.CountryId,
-                DateOfBith = actor.DateOfBith
+                Id = actor.actorId,
+                FirstName = actor.firstName,
+                LastName = actor.lastName,
+                CountryCode = actor.countryCode,
+                DateOfBirth = actor.dateOfBirth
             };
             var response = await _httpClient.PutAsJsonAsync<ActorUpdateDTO>(
-                _requestUri + "/" + actor.Id, actorUpd);
+                _requestUri + "/" + actor.actorId, actorUpd);
             await _messagingService.Add(response.IsSuccessStatusCode ?
                 "ActorService::Sent request for update" :
                 "ActorService::Error while updating");
@@ -88,9 +88,9 @@ namespace project.Services
             List<Actor> actors = await _httpClient.GetFromJsonAsync<List<Actor>>(
                         _requestUri);
             List<Actor> result = actors.Where(actor =>
-                            actor.FirstName.ToLower().Contains(fn.ToLower()) ||
-                            actor.LastName.ToLower().Contains(ln.ToLower()) ||
-                            actor.CountryCode.ToLower().Contains(c.ToLower()))
+                            actor.firstName.ToLower().Contains(fn.ToLower()) ||
+                            actor.lastName.ToLower().Contains(ln.ToLower()) ||
+                            actor.countryCode.ToLower().Contains(c.ToLower()))
                         .ToList<Actor>();
             return result;
         }

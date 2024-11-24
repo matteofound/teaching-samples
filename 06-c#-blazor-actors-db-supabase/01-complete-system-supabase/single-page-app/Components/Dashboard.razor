@@ -12,7 +12,7 @@
     {
         <a class="col-1-4">
             <div class="module hero" @onclick="@(()=>NavigateTo(actor))">
-                <h4>@actor.FirstName @actor.LastName.ToUpper()</h4>
+                <h4>@actor.firstName @actor.lastName.ToUpper()</h4>
             </div>
         </a>
     }
@@ -36,6 +36,6 @@
 
     private void NavigateTo(Actor actor)
     {
-        _navigationManager.NavigateTo("/actordetail/" + @actor.Id);
+        _navigationManager.NavigateTo("/actordetail/" + @actor.actorId);
     }
 }
