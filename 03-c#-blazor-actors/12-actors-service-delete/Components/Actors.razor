@@ -32,7 +32,7 @@ else
             <li>
                 <span @onclick="@(()=>OnSelect(a))">
                     <span class="badge">@a.Id</span> @a.FirstName &nbsp; @a.LastName
-                    - @a.DateOfBith?.ToShortDateString() ( @a.CountryCode )
+                    - @a.DateOfBirth?.ToShortDateString() ( @a.CountryCode )
                 </span>
                 <button class="delete" @onclick="@(()=>Delete(a))">x</button>
             </li>
@@ -51,7 +51,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        _actors = await _actorService.GetActors(reload: true);
+        _actors = await _actorService.GetActorsAsync(reload: true);
     }
 
     private async Task OnSelect(Actor actor)
@@ -63,12 +63,12 @@ else
 
     private async Task Add()
     {
-        _actors = await _actorService.Add(FirstName, LastName, Country);
+        _actors = await _actorService.AddAsync(FirstName, LastName, Country);
     }
 
     private async Task Delete(Actor actor)
     {
-        _actors = await _actorService.Delete(actor);
+        _actors = await _actorService.DeleteAsync(actor);
     }
 
 }

@@ -54,13 +54,21 @@
             FirstName = "Kevin"
         };
 
-    private Actor[] filmCrew = new Actor[3];
+    private Actor theGoodGuy = new Actor()
+        {
+            LastName = "Nero",
+            ImdbMark = 9.9,
+            FirstName = "Franco"
+        };
+
+    private Actor[] filmCrew = new Actor[4];
 
     protected override async Task OnInitializedAsync()
     {
         filmCrew[0] = movieStar1;
         filmCrew[1] = movieStar2;
         filmCrew[2] = theBadGuy;
+        filmCrew[3] = theGoodGuy;
     }
 
     private void AverageIMDB()

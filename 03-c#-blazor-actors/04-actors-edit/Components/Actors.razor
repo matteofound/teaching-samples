@@ -4,7 +4,7 @@
 <div><span>first name: </span>@_actor.FirstName</div>
 <div><span>last name: </span>@_actor.LastName</div>
 <div><span>country: </span>@_actor.CountryCode</div>
-<div><span>date of birth: </span> @_actor.DateOfBith?.ToString("MM/dd/yyyy")</div>
+<div><span>date of birth: </span> @_actor.DateOfBirth?.ToString("MM/dd/yyyy")</div>
 <br/>
 <div>
     <label> first name: </label>
@@ -20,7 +20,7 @@
 </div>
 <div>
     <label> date of birth: </label>
-    <input @bind="_actor.DateOfBith" placeholder="DateOfBith">
+    <input @bind="_actor.DateOfBirth" placeholder="DateOfBirth">
 </div>
 @code
 {
@@ -29,7 +29,7 @@
         Id = 3,
         FirstName = "Robert",
         LastName = "De Niro",
-        DateOfBith = new DateTime(1943, 12, 17),
+        DateOfBirth = new DateTime(1943, 12, 17),
         CountryCode = "US"
     };
 }

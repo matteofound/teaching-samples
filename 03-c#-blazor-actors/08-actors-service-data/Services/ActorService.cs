@@ -17,7 +17,7 @@ namespace project.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<Actor>> GetActors()
+        public async Task<List<Actor>> GetActorsAsync()
         {
             Actor[] result = await _httpClient.GetFromJsonAsync<Actor[]>(
                 "sample-data/actors.json");
