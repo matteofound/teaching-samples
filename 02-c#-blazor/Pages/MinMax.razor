@@ -1,0 +1,98 @@
+@page "/min-max"
+
+<PageTitle>Minimum and Maximum</PageTitle>
+<h1>Minimum and Maximum</h1>
+
+<div class="container border">
+<p>
+You can try to enter integers, real numbers and texts that are not numbers at all.
+</p>
+</div>
+<div class="container border">
+
+<table class="table-primary">
+    <tr>
+        <td>First argument:</td>
+        <td><input style="text-align:right" @bind="x"/></td>
+    </tr>
+    <tr>
+        <td>Second argument:</td>
+        <td><input style="text-align:right" @bind="y"/></td>
+    </tr>
+    <tr>
+        <td>Third argument:</td>
+        <td><input style="text-align:right" @bind="z"/></td>
+    </tr>
+    <tr>
+        <td>Fourth argument:</td>
+        <td><input style="text-align:right" @bind="w"/></td>
+    </tr>
+    <tr>
+        <td>Fifth argument:</td>
+        <td><input style="text-align:right" @bind="t"/></td>
+    </tr>
+    <tr>
+        <td style="text-align:center" colspan="2">
+            <button @onclick="Minimum">Determine Minimum</button> &nbsp; 
+            <button @onclick="Maximum">Determine Maximum</button> &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:center" colspan="2">
+            <button @onclick="Sum">Determine Sum</button> &nbsp; 
+            <button @onclick="Product">Determine Product</button> &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td>Result:</td>
+        <td><input style="text-align:right" @bind="result"/></td>
+    </tr>
+</table>
+</div>
+<br/>
+@code {
+
+    private double x=0;
+    private double y=-1.5;
+    private double z = 1.5;
+    private double w = 2;
+    private double t = -0.7;
+    private double result;
+
+    private void Minimum()
+    {
+        double min = x;
+        if (y < min)
+            min = y;
+        if (z < min)
+            min = z;
+        if (w < min)
+            min = w;
+        if (t < min)
+            min = t;
+        result = min;
+    }
+
+    private void Maximum()
+    {
+        double max = x;
+        if (y > max)
+            max = y;
+        if (z > max)
+            max = z;
+        if (w > max)
+            max = w;
+        if (t > max)
+            max = t;
+        result = max;
+    }
+
+    private void Sum(){
+        result = x+y+z+w+t;
+    }
+
+    private void Product(){
+        result = x*y*z*w*t;
+    }
+
+}

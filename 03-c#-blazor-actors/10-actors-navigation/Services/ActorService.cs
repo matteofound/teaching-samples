@@ -21,7 +21,7 @@ namespace project.Services
                 ArgumentNullException(nameof(messagingService));
         }
 
-        public async Task<List<Actor>> GetActors()
+        public async Task<List<Actor>> GetActorsAsync()
         {
             await _messagingService.Add("ActorsService::Actors fetched");
             Actor[] result = await _httpClient.GetFromJsonAsync<Actor[]>(

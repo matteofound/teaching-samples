@@ -22,7 +22,7 @@ namespace project.Services
             _messagingService = messagingService ?? throw new
                 ArgumentNullException(nameof(messagingService));
         }
-        public async Task<List<Actor>> GetActors(bool reload = false)
+        public async Task<List<Actor>> GetActorsAsync(bool reload = false)
         {
             if (_actors == null || reload)
             {
@@ -38,7 +38,7 @@ namespace project.Services
             return _actors;
         }
 
-        public Task<List<Actor>> Add(string firstName, string lastName,
+        public Task<List<Actor>> AddAsync(string firstName, string lastName,
             string country)
         {
             long maxId = _actors.Max(actor => actor.Id) + 1;
@@ -54,7 +54,7 @@ namespace project.Services
         }
 
 
-        public Task<List<Actor>> Delete(Actor actor)
+        public Task<List<Actor>> DeleteAsync(Actor actor)
         {
             _actors.Remove(actor);
             return Task.FromResult(_actors);

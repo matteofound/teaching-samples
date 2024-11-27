@@ -14,7 +14,7 @@ else
             <li @onclick="@(()=>OnSelect(a))" 
                 class="@((a==_selectedActor)?"selected":"")" >
                 <span class="badge">@a.Id</span> @a.FirstName &nbsp; @a.LastName
-                - @a.DateOfBith?.ToShortDateString() ( @a.CountryCode )
+                - @a.DateOfBirth?.ToShortDateString() ( @a.CountryCode )
             </li>
         }
     </ul>
@@ -29,7 +29,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        _actors = await _actorService.GetActors();
+        _actors = await _actorService.GetActorsAsync();
     }
 
     private async Task OnSelect(Actor actor)

@@ -9,6 +9,6 @@ namespace project.Models
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string CountryCode { get; set; }
-        public DateTime? DateOfBith { get; set; }
+        public DateTime? DateOfBirth { get; set; }
     }
 }

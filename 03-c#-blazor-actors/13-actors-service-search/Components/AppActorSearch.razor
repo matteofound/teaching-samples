@@ -39,6 +39,7 @@
     {
         return _actorService.Search(searchBox, searchBox, searchBox);
     }
+    
     private async Task OnSelect(Actor a){
         await _messagingService.Add("Actor selected " + a.FirstName + " " 
             + a.LastName + " (" + a.Id + ")");

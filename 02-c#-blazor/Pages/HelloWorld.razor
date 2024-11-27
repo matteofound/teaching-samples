@@ -1,0 +1,24 @@
+@page "/hello-world"
+
+<PageTitle>Sequence</PageTitle>
+<h1>Sequence</h1>
+<br />
+<button @onclick="Execute">Do It!</button>
+<br />
+Output:
+<br />
+<div style="border:solid; border-color:black">
+    <pre>@message</pre>
+</div>
+
+@code {
+    private string message = "";
+
+    private void Execute()
+    {
+        message = message + "Hello world!!!" + Environment.NewLine;
+        message = message + "Hello World, again!" + Environment.NewLine;
+        message = message + "Hello World, once again!" + Environment.NewLine;
+        message = message + "Goodbye." + Environment.NewLine;
+    }
+}

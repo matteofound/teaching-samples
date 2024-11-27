@@ -12,19 +12,20 @@ else
         {
             <li>
                 <span class="badge">@a.Id</span> @a.FirstName &nbsp; @a.LastName
-                - @a.DateOfBith?.ToString("dd.MM.yyyy") ( @a.CountryCode )
+                - @a.DateOfBirth?.ToString("dd.MM.yyyy") ( @a.CountryCode )
             </li>
         }
     </ul>
 }
-
+@if (_actor != null)
+{
 <h2>Details for @_actor.FirstName @_actor.LastName.ToUpper()</h2>
 <br />
 <div><span>id: </span>@_actor.Id</div>
 <div><span>first name: </span>@_actor.FirstName</div>
 <div><span>last name: </span>@_actor.LastName</div>
 <div><span>country: </span>@_actor.CountryCode</div>
-<div><span>date of birth: </span> @_actor.DateOfBith?.ToString("MM/dd/yyyy")</div>
+<div><span>date of birth: </span> @_actor.DateOfBirth?.ToString("MM/dd/yyyy")</div>
 <br />
 <div>
     <label> first name: </label>
@@ -40,24 +41,18 @@ else
 </div>
 <div>
     <label> date of birth: </label>
-    <input @bind="_actor.DateOfBith" placeholder="DateOfBith">
+    <input @bind="_actor.DateOfBirth" placeholder="DateOfBirth">
 </div>
+}
 @code
 {
-    Actor _actor = new Actor()
-    {
-        Id = 3,
-        FirstName = "Robert",
-        LastName = "De Niro",
-        DateOfBith = new DateTime(1943, 12, 17),
-        CountryCode = "US"
-    };
-
     private Actor[] _actors;
+    private Actor _actor;
 
     protected override async Task OnInitializedAsync()
     {
         _actors = await _httpClient.GetFromJsonAsync<Actor[]>("sample-data/actors.json");
+        _actor = _actors[0];
     }
 
 }

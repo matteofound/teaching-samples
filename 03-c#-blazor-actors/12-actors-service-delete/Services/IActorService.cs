@@ -8,10 +8,10 @@ namespace project.Services
 {
     public interface IActorService
     {
-        Task<List<Actor>> GetActors(bool reload = false);
+        Task<List<Actor>> GetActorsAsync(bool reload = false);
 
-        Task<List<Actor>> Add(string firstName, string lastName, string country);
+        Task<List<Actor>> AddAsync(string firstName, string lastName, string country);
 
-        Task<List<Actor>> Delete(Actor actor);
+        Task<List<Actor>> DeleteAsync(Actor actor);
     }
 }

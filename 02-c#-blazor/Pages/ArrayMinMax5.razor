@@ -1,0 +1,70 @@
+﻿@page "/array-min-max-5"
+
+<PageTitle>Min, Max, Sum and Product</PageTitle>
+<h1>Minimum and Maximum</h1>
+<p>
+You can try to enter integers, real numbers and texts that are not numbers at all.
+</p>
+<table>
+    <tr>
+        <td>First argument:</td>
+        <td><input style="text-align:right" @bind="elements[0]"/></td>
+    </tr>
+    <tr>
+        <td>Second argument:</td>
+        <td><input style="text-align:right" @bind="elements[1]"/></td>
+    </tr>
+    <tr>
+        <td>Third argument:</td>
+        <td><input style="text-align:right" @bind="elements[2]"/></td>
+    </tr>
+    <tr>
+        <td>Fourth argument:</td>
+        <td><input style="text-align:right" @bind="elements[3]"/></td>
+    </tr>
+    <tr>
+        <td>Fifth argument:</td>
+        <td><input style="text-align:right" @bind="elements[4]"/></td>
+    </tr>
+    <tr>
+        <td style="text-align:center" colspan="2">
+            <button @onclick="Minimum">Minimum</button> &nbsp; 
+            <button @onclick="Maximum">Maximum</button> &nbsp;
+            <button @onclick="Sum">Sum</button> &nbsp; 
+            <button @onclick="Product">Product</button> &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td>Result:</td>
+        <td><input style="text-align:right" @bind="result"/></td>
+    </tr>
+</table>
+<br/>
+@code {
+
+    private double[] elements = {-1.5, 1.5, 2, 0.7, 5 };
+    private double result;
+
+
+    private void Minimum()
+    {
+        result = DSS.Helpers.ArrayHelper.Min(elements);
+    }
+
+    private void Maximum()
+    {
+        result = DSS.Helpers.ArrayHelper.Max(elements);
+    }
+
+    private void Sum()
+    {
+        result = DSS.Helpers.ArrayHelper.Sum(elements);
+    }
+
+    private void Product()
+    {
+        result = DSS.Helpers.ArrayHelper.Product(elements);
+    }
+
+
+}

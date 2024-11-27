@@ -1,0 +1,48 @@
+@inject IActorService _actorService;
+@inject NavigationManager _navigationManager;
+@inject IMessagingService _messagingService;
+
+<div id="search-component">
+    <h4><label for="searchBox">Actor Search</label></h4>
+
+    <input id="search-box" @bind-value="searchBox" @bind-value:event="oninput"/>
+
+    <ul class="search-result">
+        @foreach(var actor in filteredActors){
+            <li @onclick="@(() => OnSelect(actor))">
+                <a>
+                    @actor.firstName @actor.lastName.ToUpper() (@actor.countryCode)
+                </a>
+            </li>
+    }   
+    </ul>
+</div>
+
+@code{
+
+    string search;
+
+    List<Actor> filteredActors = new List<Actor>();
+
+
+    string searchBox {
+        get{
+            return search;
+        }
+        set{
+            search = value;
+            filteredActors =  Search(value).GetAwaiter().GetResult();
+        }
+    }
+    
+    private async Task<List<Actor>> Search(string text)
+    {
+        return await _actorService.Search(searchBox, searchBox, searchBox);
+    }
+    private async Task OnSelect(Actor a){
+        await _messagingService.Add("Actor selected " + a.firstName + " " 
+            + a.lastName + " (" + a.actorId + ")");
+        _navigationManager.NavigateTo("/actordetail/" + a.actorId);
+    }
+    
+}

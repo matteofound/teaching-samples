@@ -1,0 +1,96 @@
+@page "/geometry"
+
+<PageTitle>Circumference and Area</PageTitle>
+<h1>Circumference and Area</h1>
+<br/>
+<table>
+    <tr>
+        <td>Shape:</td>
+        <td>
+            <select @bind="shape">
+              <option value="square">Square</option>
+              <option value="rectangle">Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="elipse">Elipse</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Argument:</td>
+        <td>
+            <input style="text-align:right" @bind="x"/>
+        </td>
+    </tr>
+    @if (shape == "rectangle" || shape == "elipse")
+    {
+        <tr>
+            <td>Second argument:</td>
+            <td>
+                <input style="text-align:right" @bind="y"/>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td style="text-align:center" colspan="2">
+            <button @onclick="CircumferenceArea">Calculate</button> &nbsp; 
+        </td>
+    </tr>
+    <tr>
+        <td>Circumference:</td>
+        <td><input style="text-align:right" @bind="circumference"/></td>
+    </tr>
+    <tr>
+        <td>Area:</td>
+        <td><input style="text-align:right" @bind="area"/></td>
+    </tr>
+</table>
+<br/>
+
+
+
+@code {
+    private double pi = Math.PI;
+
+    private string shape = "square";
+
+    private double x = 1;
+
+    private double y = 2;
+
+    private double circumference;
+
+    private double area;
+
+    private void CircumferenceArea()
+    {
+        System.Console.WriteLine("Shape: " + shape + ". x: " + x + ".");
+        if (shape == "circle")
+        {
+            circumference = 2 * pi * x;
+            area = pi * x * x;
+        }
+        else if (shape == "square")
+        {
+            circumference = 4 * x;
+            area = x * x;
+        }
+        else if (shape == "rectangle")
+        {
+            circumference = 2 * (x + y);
+            area = x * y;
+        }
+        else if (shape == "elipse")
+        {
+            area = x * y * pi;
+            circumference = Math.Sqrt((x*x)+(y*y)) * pi ;
+        }
+        else
+        {
+            // we can not calculate area or circumference for this shape
+            circumference = Double. NegativeInfinity;
+            area = Double.NegativeInfinity;
+        }
+        System.Console.WriteLine("Area: " + area + ". Circumference: " + circumference + ".");
+        System.Console.WriteLine();
+    }
+}

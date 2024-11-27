@@ -13,7 +13,7 @@ else
             <li @onclick="@(()=>OnSelect(a))" 
                 class="@((a==_selectedActor)?"selected":"")" >
                 <span class="badge">@a.Id</span> @a.FirstName &nbsp; @a.LastName
-                - @a.DateOfBith?.ToShortDateString() ( @a.CountryCode )
+                - @a.DateOfBirth?.ToShortDateString() ( @a.CountryCode )
             </li>
         }
     </ul>
@@ -27,7 +27,7 @@ else
     <div><span>first name: </span>@_selectedActor.FirstName</div>
     <div><span>last name: </span>@_selectedActor.LastName</div>
     <div><span>country: </span>@_selectedActor.CountryCode</div>
-    <div><span>date of birth: </span> @_selectedActor.DateOfBith?.ToString("MM/dd/yyyy")</div>
+    <div><span>date of birth: </span> @_selectedActor.DateOfBirth?.ToString("MM/dd/yyyy")</div>
     <br />
     <div>
         <label> first name: </label>
@@ -43,13 +43,13 @@ else
     </div>
     <div>
         <label> date of birth: </label>
-        <input @bind="_selectedActor.DateOfBith" placeholder="DateOfBith">
+        <input @bind="_selectedActor.DateOfBirth" placeholder="DateOfBirth">
     </div>
 }
 
 @code
 {
-    Actor _selectedActor = null;
+    private Actor _selectedActor = null;
 
     private Actor[] _actors;
 

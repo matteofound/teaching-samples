@@ -1,0 +1,86 @@
+﻿@page "/array-indexing"
+
+<PageTitle>Arrays - indexing</PageTitle>
+<h1>Arrays - indexing</h1>
+<br/>
+<button @onclick="Execute">Do It!</button>
+<br/>
+Output:
+<br/>
+<div style="border:solid; border-color:black">
+  <pre>@message</pre>
+</div>
+
+@code {
+    private string message = "";
+
+    private void Execute()
+    {
+        string[] strA = new string[40];
+        strA[2] = "mickey";
+        strA[3] = "mouse";
+        message = "strA: " + strA.ToString() + Environment.NewLine;
+        System.Console.WriteLine("strA: " + strA.ToString());
+        message += "strA[2]: " + strA[2] + Environment.NewLine;
+        System.Console.WriteLine("strA[2]: " + strA[2]);
+        message += "strA[3]: " + strA[3] + Environment.NewLine;
+        System.Console.WriteLine("strA[3]: " + strA[3]);
+        message += "strA[10]: " + strA[10] + Environment.NewLine;
+        System.Console.WriteLine("strA[10]: " + strA[10]);
+        message += "strA.Length: " + strA.Length + Environment.NewLine;
+        System.Console.WriteLine("strA.Length: " + strA.Length);
+        message += Environment.NewLine;
+        System.Console.WriteLine();
+
+        byte[] bytA = new byte[10];
+        bytA[2] = 42;
+        bytA[0] = 12;
+        message += "bytA: " + bytA.ToString() + Environment.NewLine;
+        System.Console.WriteLine("bytA: " + bytA.ToString());
+        message += "bytA[0]: " + bytA[0] + Environment.NewLine;
+        System.Console.WriteLine("bytA[0]: " + bytA[0]);
+        message += "bytA[1]: " + bytA[1] + Environment.NewLine;
+        System.Console.WriteLine("bytA[1]: " + bytA[1]);
+        message += "bytA[2]: " + bytA[2] + Environment.NewLine;
+        System.Console.WriteLine("bytA[2]: " + bytA[2]);
+        message += "bytA[2]+bytA[0]: " + (bytA[2] + bytA[0]) + Environment.NewLine;
+        System.Console.WriteLine("bytA[2]+bytA[0]: " + (bytA[2] + bytA[0]));
+        message += "bytA.Length: " + bytA.Length + Environment.NewLine;
+        System.Console.WriteLine("bytA.Length: " + bytA.Length);
+        message += Environment.NewLine;
+        System.Console.WriteLine();
+
+        String s = " special ";
+        String[] adj = { s, " very ", " much " };
+        String[] seasons = { " spring", " autumn", adj[0] + adj[1] + adj[2] + "winner", " summer" };
+        message += "seasons: " + seasons.ToString() + Environment.NewLine;
+        System.Console.WriteLine("seasons: " + seasons.ToString());
+        message += "seasons.Length: " + seasons.Length + Environment.NewLine;
+        System.Console.WriteLine("seasons.Length: " + seasons.Length);
+        message += "seasons[0]: " + seasons[0] + Environment.NewLine;
+        System.Console.WriteLine("seasons[0]: " + seasons[0]);
+        message += "seasons[2]: " + seasons[2] + Environment.NewLine;
+        System.Console.WriteLine("seasons[2]: " + seasons[2]);
+        message += Environment.NewLine;
+        System.Console.WriteLine();
+
+        int[] numbers = { 24, 48, 96, 192, 36, 72, 144 };
+        message += "numbers: " + numbers.ToString() + Environment.NewLine;
+        System.Console.WriteLine(numbers.ToString());
+        message += "numbers.Length: " + numbers.Length + Environment.NewLine;
+        System.Console.WriteLine("numbers.Length: " + numbers.Length);
+        message += "numbers[0]: " + numbers[0] + Environment.NewLine;
+        System.Console.WriteLine(numbers[0]);
+        message += "numbers[1] + numbers[2]: " + (numbers[1] + numbers[2]) + Environment.NewLine;
+        System.Console.WriteLine(numbers[1] + numbers[2]);
+        message += "numbers[numbers.Length - 1]: " + numbers[numbers.Length - 1] + Environment.NewLine;
+        System.Console.WriteLine(numbers[numbers.Length - 1]);
+        int indexExpression = 15-12;
+        message += "indexExpression: " + indexExpression + Environment.NewLine;
+        message += "numbers[indexExpression]: " + numbers[indexExpression] + Environment.NewLine;
+        System.Console.WriteLine("indexExpression: " + indexExpression);
+        System.Console.WriteLine("numbers[indexExpression]: " + numbers[indexExpression]);
+        message += Environment.NewLine;
+        System.Console.WriteLine(); 
+    }
+}

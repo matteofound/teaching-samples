@@ -31,7 +31,7 @@ else
         {
             <li @onclick="@(()=>OnSelect(a))" >
                 <span class="badge">@a.Id</span> @a.FirstName &nbsp; @a.LastName
-                - @a.DateOfBith?.ToShortDateString() ( @a.CountryCode )
+                - @a.DateOfBirth?.ToShortDateString() ( @a.CountryCode )
             </li>
         }
     </ul>

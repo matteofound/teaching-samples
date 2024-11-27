@@ -29,7 +29,7 @@
 
     private async Task<Actor[]> GetTopActors()
     {
-        var actors = await _actorService.GetActors();
+        var actors = await _actorService.GetActorsAsync();
         return actors.Take(4).ToArray();
     }
 

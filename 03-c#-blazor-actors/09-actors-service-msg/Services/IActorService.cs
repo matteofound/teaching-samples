@@ -8,6 +8,6 @@ namespace project.Services
 {
     public interface IActorService
     {
-        Task<List<Actor>> GetActors();
+        Task<List<Actor>> GetActorsAsync();
     }
 }

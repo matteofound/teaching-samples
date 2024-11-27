@@ -1,7 +1,7 @@
 @inject IMessagingService messagingService
 
 <h2>Messages</h2>
-<button class="clear" @onclick="clearMessages">Clear</button>
+<button class="clear" @onclick="ClearMessages">Clear</button>
 @foreach (var msg in Messages)
 {
     <div>@msg</div>    
@@ -27,7 +27,7 @@
         });
     }
 
-    private async void clearMessages()
+    private async void ClearMessages()
     {
         await messagingService.Clear();
     }
